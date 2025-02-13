@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { Typography, Skeleton, Select, MenuItem } from "@mui/material"
+import { Typography, Skeleton, Select, MenuItem, IconButton } from "@mui/material"
 import { motion } from "framer-motion"
 import { getExercises } from "../lib/api"
 import type { MuscleGroup, DifficultyLevel } from "../types/exercise"
+import { Heart } from "lucide-react"
+import { useFavoriteStore } from "../store/useFavoriteStore"
 
 const muscleGroups: MuscleGroup[] = ["abdominals", "biceps", "triceps", "chest", "legs", "back", "shoulders"]
 
@@ -25,6 +27,8 @@ export default function Categories() {
         difficulty: selectedDifficulty,
       }),
   })
+
+  const { addFavorite, removeFavorite, isFavorite } = useFavoriteStore()
 
   if (isLoading) {
     return (
@@ -109,16 +113,25 @@ export default function Categories() {
           transition={{ duration: 0.5 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
         >
-          {exercises.map((exercise) => (
+          {exercises.map((exercise, index) => (
             <motion.div
-              key={exercise.name}
+              key={`${exercise.name}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
               className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
             >
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{exercise.name}</h3>
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{exercise.name}</h3>
+                  <IconButton
+                    onClick={() => (isFavorite(exercise.name) ? removeFavorite(exercise.name) : addFavorite(exercise))}
+                    className={`${isFavorite(exercise.name) ? "text-red-500" : "text-gray-400"} hover:text-red-600`}
+                    size="small"
+                  >
+                    <Heart size={20} fill={isFavorite(exercise.name) ? "currentColor" : "none"} />
+                  </IconButton>
+                </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                   {exercise.muscle} | {exercise.difficulty}
                 </p>

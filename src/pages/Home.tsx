@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { Typography, Skeleton } from "@mui/material"
+import { Typography, Skeleton, IconButton } from "@mui/material"
 import { motion } from "framer-motion"
 import { getExercises } from "../lib/api"
 import type { ExerciseType } from "../types/exercise"
+import { Heart } from "lucide-react"
+import { useFavoriteStore } from "../store/useFavoriteStore"
 
 const container = {
   hidden: { opacity: 0 },
@@ -28,6 +30,8 @@ export default function Home() {
     queryKey: ["featured-exercises"],
     queryFn: () => getExercises({ type: "strength" as ExerciseType }),
   })
+
+  const { addFavorite, removeFavorite, isFavorite } = useFavoriteStore()
 
   if (isLoading) {
     return (
@@ -81,7 +85,16 @@ export default function Home() {
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
           >
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{exercise.name}</h3>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{exercise.name}</h3>
+                <IconButton
+                  onClick={() => (isFavorite(exercise.name) ? removeFavorite(exercise.name) : addFavorite(exercise))}
+                  className={`${isFavorite(exercise.name) ? "text-red-500" : "text-gray-400"} hover:text-red-600`}
+                  size="small"
+                >
+                  <Heart size={20} fill={isFavorite(exercise.name) ? "currentColor" : "none"} />
+                </IconButton>
+              </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                 {exercise.muscle} | {exercise.difficulty}
               </p>
