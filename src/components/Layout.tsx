@@ -10,7 +10,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { isDarkMode } = useThemeStore()
-
+  
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? "dark" : "light",
