@@ -4,7 +4,7 @@ import { Typography, Skeleton, Select, MenuItem, IconButton } from "@mui/materia
 import { motion } from "framer-motion"
 import { getExercises } from "../lib/api"
 import type { MuscleGroup, DifficultyLevel } from "../types/exercise"
-import { Heart } from "lucide-react"
+import { Heart, ChevronDown, ChevronUp } from "lucide-react"
 import { useFavoriteStore } from "../store/useFavoriteStore"
 
 const muscleGroups: MuscleGroup[] = ["abdominals", "biceps", "triceps", "chest", "legs", "back", "shoulders"]
@@ -14,6 +14,7 @@ const difficulties: DifficultyLevel[] = ["beginner", "intermediate", "expert"]
 export default function Categories() {
   const [selectedMuscle, setSelectedMuscle] = useState<MuscleGroup>("chest")
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>("beginner")
+  const [expandedInstructions, setExpandedInstructions] = useState<string | null>(null)
 
   const {
     data: exercises,
@@ -135,7 +136,27 @@ export default function Categories() {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                   {exercise.muscle} | {exercise.difficulty}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">{exercise.instructions}</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  {expandedInstructions === exercise.name
+                    ? exercise.instructions
+                    : `${exercise.instructions.slice(0, 100)}...`}
+                </p>
+                <button
+                  onClick={() => setExpandedInstructions(expandedInstructions === exercise.name ? null : exercise.name)}
+                  className="mt-2 text-blue-500 hover:text-blue-600 flex items-center"
+                >
+                  {expandedInstructions === exercise.name ? (
+                    <>
+                      <ChevronUp size={16} className="mr-1" />
+                      Show Less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown size={16} className="mr-1" />
+                      Show More
+                    </>
+                  )}
+                </button>
               </div>
             </motion.div>
           ))}

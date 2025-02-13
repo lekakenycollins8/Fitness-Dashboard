@@ -6,11 +6,12 @@ import debounce from "lodash/debounce"
 import { Typography, TextField, Skeleton, IconButton } from "@mui/material"
 import { motion } from "framer-motion"
 import { getExercises } from "../lib/api"
-import { Heart } from "lucide-react"
+import { Heart, ChevronDown, ChevronUp } from "lucide-react"
 import { useFavoriteStore } from "../store/useFavoriteStore"
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("")
+  const [expandedInstructions, setExpandedInstructions] = useState<string | null>(null)
 
   const { data: exercises, isLoading } = useQuery({
     queryKey: ["search", searchTerm],
@@ -84,7 +85,27 @@ export default function Search() {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                   {exercise.muscle} | {exercise.difficulty}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">{exercise.instructions}</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  {expandedInstructions === exercise.name
+                    ? exercise.instructions
+                    : `${exercise.instructions.slice(0, 100)}...`}
+                </p>
+                <button
+                  onClick={() => setExpandedInstructions(expandedInstructions === exercise.name ? null : exercise.name)}
+                  className="mt-2 text-blue-500 hover:text-blue-600 flex items-center"
+                >
+                  {expandedInstructions === exercise.name ? (
+                    <>
+                      <ChevronUp size={16} className="mr-1" />
+                      Show Less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown size={16} className="mr-1" />
+                      Show More
+                    </>
+                  )}
+                </button>
               </div>
             </motion.div>
           ))}
