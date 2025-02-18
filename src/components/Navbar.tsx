@@ -1,32 +1,22 @@
 import { IconButton } from "@mui/material"
-import { Sun, Moon, Menu } from "lucide-react"
-import { useThemeStore } from "../store/useThemeStore"
+import { Menu } from "lucide-react"
 import { useSidebarStore } from "../store/useSidebarStore"
 
 export default function Navbar() {
-  const { isDarkMode, toggleTheme } = useThemeStore()
   const { toggle } = useSidebarStore()
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-sm">
+    <nav className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <IconButton
               onClick={toggle}
-              className="md:hidden mr-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              className="md:hidden mr-2 text-gray-500 hover:text-gray-700"
             >
               <Menu size={20} className="h-5 w-5" />
             </IconButton>
-            <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Fitness Dashboard</h1>
-          </div>
-          <div className="flex items-center">
-            <IconButton
-              onClick={toggleTheme}
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {isDarkMode ? <Sun size={20} className="h-5 w-5" /> : <Moon size={20} className="h-5 w-5" />}
-            </IconButton>
+            <h1 className="text-xl font-semibold text-gray-800">Fitness Dashboard</h1>
           </div>
         </div>
       </div>

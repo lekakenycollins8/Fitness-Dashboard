@@ -7,7 +7,6 @@ const menuItems = [
   { text: "Categories", icon: Dumbbell, path: "/categories" },
   { text: "Search", icon: SearchIcon, path: "/search" },
   { text: "Favorites", icon: Heart, path: "/favorites" },
-  { text: "Settings", icon: SettingsIcon, path: "/settings" },
 ]
 
 export default function Sidebar() {

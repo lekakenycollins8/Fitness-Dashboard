@@ -27,7 +27,6 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/settings" element={<Settings />} />
           </Routes>
         </Layout>
       </Router>
