@@ -7,7 +7,6 @@ A modern web application that helps users discover, search, and save their favor
 - **Exercise Categories**: Browse exercises by muscle groups (abs, biceps, triceps, etc.) and difficulty levels
 - **Smart Search**: Quickly find specific exercises with real-time search functionality
 - **Favorites System**: Save your preferred exercises for quick access later
-- **Dark/Light Mode**: Choose your preferred theme for comfortable viewing
 - **Responsive Design**: Works seamlessly on phones, tablets, and desktop computers
 - **Detailed Instructions**: Each exercise comes with clear, step-by-step instructions
 
@@ -19,7 +18,6 @@ Whether you're a beginner starting your fitness journey or an experienced athlet
 - Learn proper exercise techniques through detailed instructions
 - Create a personalized collection of favorite exercises
 - Access your workout information on any device
-- Choose between light and dark themes for comfortable viewing
 
 ## 🚀 Getting Started
 
@@ -68,7 +66,6 @@ The API integration is handled through the `api.ts` file using Axios for HTTP re
 - **Categories**: Browse exercises by muscle group and difficulty
 - **Search**: Find specific exercises
 - **Favorites**: Access your saved exercises
-- **Settings**: Customize your experience (theme preferences)
 
 ## 📄 License
 
