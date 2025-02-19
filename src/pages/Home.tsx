@@ -22,6 +22,30 @@ const item = {
   show: { opacity: 1, y: 0 },
 }
 
+/**
+ * Home component that displays a grid of featured exercises.
+ * 
+ * @component
+ * @returns {JSX.Element} A responsive grid layout containing exercise cards or loading/error states
+ *
+ * @remarks
+ * This component fetches strength exercises and displays them in a grid layout.
+ * It includes the following features:
+ * - Loading state with skeleton placeholders
+ * - Error handling with user feedback
+ * - Empty state message
+ * - Responsive grid layout (1-3 columns based on screen size)
+ * - Exercise cards with:
+ *   - Exercise name and details
+ *   - Favorite/unfavorite functionality
+ *   - Expandable instructions
+ *   - Animated entry using framer-motion
+ * 
+ * @example
+ * ```tsx
+ * <Home />
+ * ```
+ */
 export default function Home() {
   const {
     data: exercises = [],

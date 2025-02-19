@@ -6,6 +6,22 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
+/**
+ * Layout component that provides the basic structure for the application.
+ * Includes a sidebar, navbar, and main content area.
+ * 
+ * @component
+ * @param {object} props - Component props
+ * @param {React.ReactNode} props.children - The content to be rendered within the layout
+ * @returns {JSX.Element} A structured page layout with sidebar, navbar and main content
+ *
+ * @example
+ * ```tsx
+ * <Layout>
+ *   <YourContent />
+ * </Layout>
+ * ```
+ */
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex h-screen bg-gray-100">

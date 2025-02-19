@@ -11,6 +11,29 @@ const api = axios.create({
   },
 });
 
+/**
+ * Fetches exercises from the API based on provided filters
+ * 
+ * @param filters - Optional filters to apply to the exercise search
+ * @param filters.name - Optional name to filter exercises
+ * @param filters.type - Optional exercise type filter
+ * @param filters.muscle - Optional target muscle filter  
+ * @param filters.difficulty - Optional difficulty level filter
+ * 
+ * @returns Promise resolving to an array of Exercise objects. Returns empty array if request fails.
+ * 
+ * @throws Never throws - Failed requests return empty array instead
+ * 
+ * @example
+ * // Get all exercises
+ * const exercises = await getExercises();
+ * 
+ * // Get exercises filtered by name and type
+ * const filteredExercises = await getExercises({
+ *   name: 'push-up',
+ *   type: 'strength'
+ * });
+ */
 export async function getExercises(filters: ExerciseFilters = {}): Promise<Exercise[]> {
   try {
     const params = new URLSearchParams();

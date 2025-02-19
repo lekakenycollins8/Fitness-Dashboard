@@ -11,6 +11,39 @@ const muscleGroups: MuscleGroup[] = ["abdominals", "biceps", "triceps", "chest",
 
 const difficulties: DifficultyLevel[] = ["beginner", "intermediate", "expert"]
 
+/**
+ * Categories component that displays a filterable list of exercises.
+ * 
+ * Features:
+ * - Filters exercises by muscle group and difficulty level
+ * - Shows loading state with skeletons
+ * - Handles error states
+ * - Allows adding/removing exercises to favorites
+ * - Expandable exercise instructions
+ * - Responsive grid layout
+ * - Animated transitions
+ * 
+ * @component
+ * @returns {JSX.Element} Rendered Categories component with exercise filters and cards
+ * 
+ * @example
+ * ```tsx
+ * <Categories />
+ * ```
+ * 
+ * @remarks
+ * The component uses:
+ * - React Query for data fetching
+ * - Material UI components for UI elements
+ * - Framer Motion for animations
+ * - Custom favorite store hook for managing favorites
+ * - Responsive design with Tailwind CSS
+ * 
+ * State management:
+ * - selectedMuscle: Current selected muscle group filter
+ * - selectedDifficulty: Current selected difficulty level filter
+ * - expandedInstructions: Tracks which exercise instructions are expanded
+ */
 export default function Categories() {
   const [selectedMuscle, setSelectedMuscle] = useState<MuscleGroup>("chest")
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>("beginner")
